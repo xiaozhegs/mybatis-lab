@@ -10,4 +10,11 @@ public interface EmpMapper {
     int insert(Emp emp);
     int update(Emp emp);
     int deleteById(Integer empId);
+
+    // 任务3：动态SQL相关方法
+    List<Emp> selectByCondition(Emp emp);
+    int updateDynamic(Emp emp);
+    int deleteByIds(List<Integer> idList);
+    int insertBatch(List<Emp> empList);
+    List<Emp> selectByChoose(String dept);
 }
