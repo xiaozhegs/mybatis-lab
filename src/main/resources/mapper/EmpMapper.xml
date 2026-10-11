@@ -16,6 +16,8 @@
         <result property="status" column="status"/>
     </resultMap>
 
+
+
     <sql id="allColumns">
         emp_id, emp_name, gender, dept, post, salary, hire_date, status
     </sql>
@@ -28,26 +30,6 @@
         SELECT <include refid="allColumns"/> FROM emp WHERE emp_id = #{empId}
     </select>
 
-    <!-- 新增并回填自增主键 -->
-    <insert id="insert" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
-        INSERT INTO emp (emp_Name, gender, dept, post, salary, hire_date, status)
-        VALUES (#{empName}, #{gender}, #{dept}, #{post}, #{salary}, #{hireDate}, #{status})
-    </insert>
-
-    <update id="update" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
-        UPDATE emp
-        SET emp_name = #{empname}, gender = #{gender}, dept = #{dept},
-        post = #{post}, salary = #{salary}, status = #{status}
-        WHERE emp_id = #{empId}
-    </update>
-
-    <delete id="deleteById" parameterType="int">
-        DELETE FROM emp WHERE emp_id = #{empId}
-    </delete>
-
-    <!-- ========== 任务3：动态SQL ========== -->
-
-    <!-- 3.1 多条件模糊查询（if / where 标签） -->
     <select id="selectByCondition" parameterType="Emp" resultMap="empMap">
         SELECT <include refid="allColumns"/> FROM emp
         <where>
@@ -66,7 +48,24 @@
         </where>
     </select>
 
-    <!-- 3.2 动态更新（set 标签） -->
+
+    <!-- 新增并回填自增主键 -->
+    <insert id="insert" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
+        INSERT INTO emp (emp_Name, gender, dept, post, salary, hire_date, status)
+        VALUES (#{empName}, #{gender}, #{dept}, #{post}, #{salary}, #{hireDate}, #{status})
+    </insert>
+
+    <update id="update" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
+        UPDATE emp
+        SET emp_name = #{empname}, gender = #{gender}, dept = #{dept},
+        post = #{post}, salary = #{salary}, status = #{status}
+        WHERE emp_id = #{empId}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM emp WHERE emp_id = #{empId}
+    </delete>
+
     <update id="updateDynamic" parameterType="Emp">
         UPDATE emp
         <set>
@@ -79,7 +78,7 @@
         WHERE emp_id = #{empId}
     </update>
 
-    <!-- 3.3 批量删除（foreach 标签） -->
+    <!-- foreach批量删除 -->
     <delete id="deleteByIds">
         DELETE FROM emp
         WHERE emp_id IN
@@ -88,7 +87,7 @@
         </foreach>
     </delete>
 
-    <!-- 3.3 批量插入（foreach 标签） -->
+    <!-- foreach批量插入 -->
     <insert id="insertBatch">
         INSERT INTO emp(emp_name,gender,dept,post,salary,status)
         VALUES
@@ -97,7 +96,7 @@
         </foreach>
     </insert>
 
-    <!-- 3.4 分支选择（choose / when / otherwise） -->
+    <!-- choose‑when‑otherwise 多选一查询 -->
     <select id="selectByChoose" resultType="Emp">
         select * from emp
         <where>
@@ -111,5 +110,6 @@
             </choose>
         </where>
     </select>
+
 
 </mapper>

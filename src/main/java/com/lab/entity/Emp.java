@@ -1,16 +1,24 @@
 package com.lab.entity;
 
+import com.baomidou.mybatisplus.annotation.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@TableName("emp")
 public class Emp {
+    @TableId(value = "emp_id", type = IdType.AUTO)
     private Integer empId;
+
+    @TableField("emp_name")
     private String empName;
+
     private String gender;
     private String dept;
     private String post;
     private BigDecimal salary;
     private Date hireDate;
+
+    @TableLogic   //逻辑删除标记（本实验可选）
     private Integer status;
 
     public Integer getEmpId() {
