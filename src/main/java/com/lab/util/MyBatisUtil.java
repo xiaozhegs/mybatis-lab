@@ -20,6 +20,8 @@ public class MyBatisUtil {
         try {
             inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             sqlSessionFactory = new MybatisSqlSessionFactoryBuilder().build(inputStream);
+            // 编程式注册 MyBatis-Plus 分页插件
+            sqlSessionFactory.getConfiguration().addInterceptor(getInterceptor());
 
 
         } catch (IOException e) {

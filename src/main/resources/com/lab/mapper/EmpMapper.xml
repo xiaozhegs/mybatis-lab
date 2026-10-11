@@ -50,12 +50,12 @@
 
 
     <!-- 新增并回填自增主键 -->
-    <insert id="insert" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
+    <insert id="insert" parameterType="Emp" useGeneratedKeys="true" keyProperty="empId">
         INSERT INTO emp (emp_Name, gender, dept, post, salary, hire_date, status)
         VALUES (#{empName}, #{gender}, #{dept}, #{post}, #{salary}, #{hireDate}, #{status})
     </insert>
 
-    <update id="update" parameterType="Emp"useGeneratedKeys="true" keyProperty="empId">
+    <update id="update" parameterType="Emp" useGeneratedKeys="true" keyProperty="empId">
         UPDATE emp
         SET emp_name = #{empname}, gender = #{gender}, dept = #{dept},
         post = #{post}, salary = #{salary}, status = #{status}

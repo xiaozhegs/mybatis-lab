@@ -18,7 +18,6 @@ public class Emp {
     private BigDecimal salary;
     private Date hireDate;
 
-    @TableLogic   //逻辑删除标记（本实验可选）
     private Integer status;
 
     public Integer getEmpId() {
@@ -99,3 +98,4 @@ public class Emp {
                 '}';
     }
 }
+
